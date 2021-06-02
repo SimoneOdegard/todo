@@ -4,22 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import useForm from '../hooks/form.js';
 
 function TodoForm(props) {
 
-  const [item, setItem] = useState({});
-
-  const handleInputChange = e => {
-    setItem({ ...item, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    e.target.reset();
-    props.addItem(item);
-    const newItem = {};
-    setItem(newItem);
-  };
+  const [handleInputChange, handleSubmit, values] = useForm(props.addItem)
 
   return (
     <>
