@@ -18,11 +18,11 @@ hooks
 
 ## Deployed site
 
-[netlify]()
+[netlify](https://wonderful-hamilton-11871e.netlify.app/)
 
 ## Pull Requests
 
-- [PR 1](https://github.com/SimoneOdegard/resty/pull/1)
+- [PR 1](https://github.com/SimoneOdegard/todo/pull/1)
 
 ## UML
 
