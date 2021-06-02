@@ -1,0 +1,102 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding:0;
+  width: 100%;
+}
+.todo-details {
+  display:flex;
+  flex-direction:column;
+
+  header {
+      display:flex;
+      flex-direction:row;
+      justify-content:space-between;
+      padding:.5em 1em;
+  }
+
+  .item {
+      flex:1;
+      padding: 1em;
+  }
+
+}
+
+.todo {
+
+  display:flex;
+  flex-direction:row;
+  justify-content: flex-start;
+  margin: 2em;
+
+  form {
+
+      display:flex;
+      flex-direction:column;
+      margin-right: 2em;
+
+      label {
+          display: flex;
+          flex-direction:column;
+          margin-bottom: 1em;
+      }
+  }
+
+  .listGroup {
+    margin-left: 70px;
+
+      #listGroupItem {
+        width: 400px;
+        display: inline-block;
+        
+          &.complete-false {
+            background: rgb(96, 219, 150);
+            &:hover {
+              background: pink;
+            }
+          }
+
+          &.complete-true {
+              background: pink;
+              text-decoration:line-through;
+              &:hover {
+                 background: seagreen;
+              }
+          }
+
+          #listGroupItem {
+              background: rgb(96, 219, 150);
+              cursor:pointer;
+              &:hover {
+                  background: pink;
+              }
+          }
+
+          .deleteItemButton {
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            flex-direction: row;
+          }
+
+      }
+  }
+
+}
+
+.todoManager {
+  color: white;
+  margin: 33px;
+  padding: 5px;
+}
+
+Form {
+  padding: 10px;
+  margin: 10px;
+
+  Button {
+    width: 100px;
+  }
+}
