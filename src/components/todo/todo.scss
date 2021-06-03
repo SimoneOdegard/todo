@@ -100,3 +100,29 @@ Form {
     width: 100px;
   }
 }
+
+.toast {
+  margin-bottom: 50px;
+  margin-left: 70px;
+
+  #toastHeader {
+
+  }
+
+  button {
+    padding: 5px;
+    float: right;
+    border: none;
+  }
+
+  #toastButton {
+    padding: 5px;
+    float: right;
+    border: none;
+    margin-bottom: 20px;
+  }
+
+  #toastBody {
+    margin-bottom: 20px;
+  }
+}

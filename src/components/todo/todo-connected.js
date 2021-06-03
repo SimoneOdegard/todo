@@ -5,9 +5,9 @@ import Navbar from 'react-bootstrap/Navbar';
 
 import './todo.scss';
 
-// const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo'; // class api
+const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo'; // class api
 
-const todoAPI = 'https://api-server-simone.herokuapp.com/'; // my api
+// const todoAPI = 'https://api-server-simone.herokuapp.com/todo'; // my api
 
 
 const ToDo = () => {
@@ -15,8 +15,8 @@ const ToDo = () => {
   const [list, setList] = useState([]);
 
   const _addItem = (item) => {
-    console.log('finding item', item);
-    item.complete = false;
+    // console.log('finding item', item);
+    // item.complete = false;
     item.due = new Date();
     fetch(todoAPI, {
       method: 'post',
@@ -43,12 +43,20 @@ const ToDo = () => {
 
   const updateItem = (id, value) => {
     let item = list.filter(i => i._id === id)[0] || {};
-
-    if (item._id) {
-      item.text = value;
-      let newList = list.map(listItem => listItem._id === item._id ? item : listItem);
-      setList(newList);
-    }
+    fetch(todoAPI, {
+      method: 'post',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(item)
+    })
+      .then(response => response.json())
+      .then(savedItem => {
+        item.text = value;
+        let newList = list.map(listItem => listItem._id === item._id ? item : listItem);
+        setList(newList);
+      })
+      .catch(console.error);
   };
 
   const _toggleComplete = id => {
