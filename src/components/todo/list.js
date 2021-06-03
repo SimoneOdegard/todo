@@ -1,12 +1,35 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { When } from 'react-if';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import useForm from '../hooks/form.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './todo.scss';
 
 function TodoList(props) {
+  
+  const [toggle, setToggle] = useState(false);
+  const [id, setId] = useState('');
+  const [value, setValue] = useState('');
+  const [handleSubmit] = useForm(todo); 
+
+  function handleToggle(id) {
+    setToggle(!toggle);
+    setId(id);
+  }
+
+  useEffect(() => {
+    console.log(value);
+  })
+
+  function todo(task) {
+    setValue(task);
+    props.updateItem(id, value);
+  }
 
   return (
     <>
@@ -20,12 +43,19 @@ function TodoList(props) {
               onClick={() => props.toggleComplete(item._id)}
               type="submit"
             >
-              {item.text}
+              {item.assignee} to {item.text}. Difficulty: {item.difficulty}
             </ListGroup.Item>
+            <Button onClick={() => handleToggle(item._id)}>UPDATE</Button>
             <Button className="deleteItemButton" type="submit" onClick={() => props.deleteItem(item._id)}>DELETE</Button>
           </div>
         ))}
       </ListGroup>
+      <When condition={toggle === true}>
+          <Form >
+            <FormControl onChange={(e) => setValue(e.target.value)} placeholder="update task" />
+            <Button onClick={(e) => {handleSubmit(e); handleToggle(id);}} >UPDATE</Button>
+          </Form>
+      </When>
     </>
   );
 }
