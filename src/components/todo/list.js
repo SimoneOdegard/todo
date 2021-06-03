@@ -6,7 +6,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import useForm from '../hooks/form.js';
-import Toast from 'react-bootstrap/Toast';
+import Modal from 'react-bootstrap/Modal';
+import Badge from 'react-bootstrap/Badge';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './todo.scss';
@@ -34,29 +35,41 @@ function TodoList(props) {
 
   return (
     <>
-      <div>
-        <Toast className="toast">
+      <div id="modal">
+        <Modal.Dialog>
           {props.list.map(item => (
             <div>
-              <Toast.Header
-                id="toastHeader"
-                key={item._id}
-                onClick={() => props.toggleComplete(item._id)}
-                type="submit"
-              >
-                <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-                <strong className="mr-auto">{item.assignee}</strong>
-                <small>{item.difficulty}</small>
-              </Toast.Header>
-              <Toast.Body id="toastBody">{item.text}</Toast.Body>
-                  <Button className="toastButton" onClick={() => handleToggle(item._id)}>UPDATE</Button>
-                  <Button className="toastButton" type="submit" onClick={() => props.deleteItem(item._id)}>DELETE</Button>
+              <Modal.Header>
+                <Modal.Title>
+                  <button id="deleteButton" type="submit" onClick={() => props.deleteItem(item._id)} type="button" class="btn-close float-right" ></button>
+                  <Badge
+                    className={`complete-${item.complete.toString()}`}
+                    key={item._id}
+                    onClick={() => props.toggleComplete(item._id)}
+                    type="submit"
+                    pill 
+                    variant={item.complete === true ? 'danger' : 'success'}
+                  >
+                    {item.complete === true ? 'complete' : 'pending'}
+                  </Badge>{' '}
+                  {item.assignee}
+                </Modal.Title>
+              </Modal.Header>
+
+              <Modal.Body>
+                <p>{item.text}</p>
+              </Modal.Body>
+
+              <Modal.Footer id="modalFooter">
+                <small id="difficulty">Difficulty: {item.difficulty}</small>
+                <Button onClick={() => handleToggle(item._id)} variant="primary">Update</Button>
+              </Modal.Footer>
             </div>
           ))}
-        </Toast>
+        </Modal.Dialog>
       </div>
       <When condition={toggle === true}>
-        <Form >
+        <Form id="formToggle">
           <FormControl onChange={(e) => setValue(e.target.value)} placeholder="update task" />
           <Button onClick={(e) => { handleSubmit(e); handleToggle(id); }} >UPDATE</Button>
         </Form>
@@ -67,54 +80,20 @@ function TodoList(props) {
 
 export default TodoList;
 
-{/* <ListGroup className="listGroup">
-  {props.list.map(item => (
-    <div className="listGroupDiv">
-      <ListGroup.Item
-        id="listGroupItem"
-        className={`complete-${item.complete.toString()}`}
-        key={item._id}
-        onClick={() => props.toggleComplete(item._id)}
-        type="submit"
-      >
-        {item.assignee} to {item.text}. Difficulty: {item.difficulty}
-      </ListGroup.Item>
-      <Button onClick={() => handleToggle(item._id)}>UPDATE</Button>
-      <Button className="deleteItemButton" type="submit" onClick={() => props.deleteItem(item._id)}>DELETE</Button>
-    </div>
-  ))}
-</ListGroup> */}
-
-{/* <Card>
-<Card.Header>Featured</Card.Header>
-{props.list.map(item => (
-  <Card.Body>
-    <Card.Title>{item.assignee}</Card.Title>
-    <Card.Text>
-      {item.text}
-    </Card.Text>
-    <small>{item.difficulty}</small>
-    <Button variant="primary">Go somewhere</Button>
-))}
-  </Card.Body>
-</Card> */}
-
-{/* <Toast className="toast">
-          {props.list.map(item => (
-            <div>
-              <Toast.Header
-                id="toastHeader"
-                key={item._id}
-                onClick={() => props.toggleComplete(item._id)}
-                type="submit"
-              >
-                <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-                <strong className="mr-auto">{item.assignee}</strong>
-                <small>{item.difficulty}</small>
-              </Toast.Header>
-              <Toast.Body id="toastBody">{item.text}</Toast.Body>
-                  <Button className="toastButton" onClick={() => handleToggle(item._id)}>UPDATE</Button>
-                  <Button className="toastButton" type="submit" onClick={() => props.deleteItem(item._id)}>DELETE</Button>
-            </div>
-          ))}
-        </Toast> */}
+// <ListGroup className="listGroup">
+//   {props.list.map(item => (
+//     <div className="listGroupDiv">
+//       <ListGroup.Item
+//         id="listGroupItem"
+//         className={`complete-${item.complete.toString()}`}
+//         key={item._id}
+//         onClick={() => props.toggleComplete(item._id)}
+//         type="submit"
+//       >
+//         {item.assignee} to {item.text}. Difficulty: {item.difficulty}
+//       </ListGroup.Item>
+//       <Button onClick={() => handleToggle(item._id)}>UPDATE</Button>
+//       <Button className="deleteItemButton" type="submit" onClick={() => props.deleteItem(item._id)}>DELETE</Button>
+//     </div>
+//   ))}
+// </ListGroup>

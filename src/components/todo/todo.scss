@@ -101,28 +101,61 @@ Form {
   }
 }
 
-.toast {
+#modal {
+  margin-top: -25px;
   margin-bottom: 50px;
   margin-left: 70px;
+  width: 500px;
 
-  #toastHeader {
-
+  .badge-success {
+    background:green;
+    display: inline-block;
+    padding: .35em .65em;
+    font-size: .75em;
+    font-weight: 700;
+    line-height: 1;
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    cursor: pointer;
   }
 
-  button {
-    padding: 5px;
-    float: right;
+  .badge-danger {
+    background:red;
+    display: inline-block;
+    padding: .35em .65em;
+    font-size: .75em;
+    font-weight: 700;
+    line-height: 1;
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    cursor: pointer;
+  }
+
+  #deleteButton {
     border: none;
+    background-color: white;
+    font-size: 12px;
+    float: right;
+    margin-left: 400px;
   }
 
-  #toastButton {
-    padding: 5px;
-    float: right;
+  #modalFooter {
     border: none;
     margin-bottom: 20px;
   }
 
-  #toastBody {
-    margin-bottom: 20px;
+  #difficulty {
+    font-size: 14px;
   }
+}
+
+#formToggle {
+  margin-left: 70px;
+  width: 500px;
 }
