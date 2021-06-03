@@ -26,6 +26,7 @@ hooks
 - [PR 2](https://github.com/SimoneOdegard/todo/pull/3) Created custom hook with form.js
 - [PR 3](https://github.com/SimoneOdegard/todo/pull/5) Got todo-connected to work
 - [PR 4](https://github.com/SimoneOdegard/todo/pull/6) Added bootstrap styling and connected my API server.
+- [PR 5](https://github.com/SimoneOdegard/todo/pull/8) Added bootstrap styling and connected working API.
 
 ## UML
 
