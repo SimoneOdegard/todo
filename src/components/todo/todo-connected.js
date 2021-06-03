@@ -85,7 +85,7 @@ const ToDo = () => {
         method: 'put',
         // mode: 'cors',
         // cache: 'no-cache',
-        // headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(item)
       })
         .then(response => response.json())
