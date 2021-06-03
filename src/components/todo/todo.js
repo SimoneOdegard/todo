@@ -17,11 +17,20 @@ function ToDo() {
   };
 
   const deleteItem = id => {
-
     let item = list.filter(i => i._id === id)[0] || {};
 
     if (item._id) {
       let newList = list.filter(listItem => listItem._id !== id);
+      setList(newList);
+    }
+  };
+
+  const updateItem = (id, value) => {
+    let item = list.filter(i => i._id === id)[0] || {};
+
+    if (item._id) {
+      item.text = value;
+      let newList = list.map(listItem => listItem._id === item._id ? item : listItem);
       setList(newList);
     }
   };
@@ -72,6 +81,7 @@ function ToDo() {
             list={list}
             toggleComplete={toggleComplete}
             deleteItem={deleteItem}
+            updateItem={updateItem}
           />
         </div>
       </section>

@@ -67,26 +67,52 @@ const ToDo = () => {
   return (
     <>
       <header>
-        <h2>
-          There are {list.filter(item => !item.complete).length} Items To Complete
-        </h2>
+        <Navbar bg="dark" variant="dark" className="todoManager">
+          <Navbar.Brand >To Do List Manager ({list.filter(item => !item.complete).length})</Navbar.Brand>
+        </Navbar>
       </header>
 
       <section className="todo">
 
         <div>
-          <TodoForm handleSubmit={_addItem} />
+          <TodoForm addItem={_addItem} />
         </div>
 
         <div>
           <TodoList
             list={list}
-            handleComplete={_toggleComplete}
+            toggleComplete={_toggleComplete}
+            deleteItem={deleteItem}
+            updateItem={updateItem}
           />
         </div>
       </section>
     </>
   );
+
+  // return (
+  //   <>
+  //     <header>
+  //       <h2>
+  //         There are {list.filter(item => !item.complete).length} Items To Complete
+  //       </h2>
+  //     </header>
+
+  //     <section className="todo">
+
+  //       <div>
+  //         <TodoForm handleSubmit={_addItem} />
+  //       </div>
+
+  //       <div>
+  //         <TodoList
+  //           list={list}
+  //           handleComplete={_toggleComplete}
+  //         />
+  //       </div>
+  //     </section>
+  //   </>
+  // );
 };
 
 export default ToDo;

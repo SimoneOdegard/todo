@@ -22,7 +22,8 @@ hooks
 
 ## Pull Requests
 
-- [PR 1](https://github.com/SimoneOdegard/todo/pull/1)
+- [PR 1](https://github.com/SimoneOdegard/todo/pull/1) Initial creation of the todo app
+- [PR 2](https://github.com/SimoneOdegard/todo/pull/3) Created custom hook with form.js
 
 ## UML
 
