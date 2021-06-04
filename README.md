@@ -28,6 +28,7 @@ custom-hooks
 - [PR 3](https://github.com/SimoneOdegard/todo/pull/5) Got todo-connected to work
 - [PR 4](https://github.com/SimoneOdegard/todo/pull/6) Added bootstrap styling and connected my API server.
 - [PR 5](https://github.com/SimoneOdegard/todo/pull/8) Added bootstrap styling and connected working API.
+- [PR 6](https://github.com/SimoneOdegard/todo/pull/9) Pagination and hide completed items has been added.
 
 ## UML
 

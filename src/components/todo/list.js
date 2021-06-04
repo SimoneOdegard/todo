@@ -37,7 +37,7 @@ function TodoList(props) {
 
   let currentItems = props.list;
 
-  if (context.hideComplete) {
+  if (context.hideCompletedItems) {
     currentItems = currentItems.filter(item => !item.complete);
   }
 
@@ -50,7 +50,7 @@ function TodoList(props) {
   return (
     <>
       <div id="modal">
-        <Button variant="primary" onClick={() => context.setHideComplete(!context.hideComplete)}>
+        <Button variant="primary" onClick={() => context.setHideCompletedItems(!context.hideCompletedItems)}>
           Hide Completed Items
         </Button>
         <Modal.Dialog>
