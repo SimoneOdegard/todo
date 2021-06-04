@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import { When } from 'react-if';
-// import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
@@ -9,10 +8,13 @@ import useForm from '../hooks/form.js';
 import Modal from 'react-bootstrap/Modal';
 import Badge from 'react-bootstrap/Badge';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { SettingsContext } from '../../context/site.js';
+import Pagination from './pagination.js';
 
 import './todo.scss';
 
 function TodoList(props) {
+  const context = useContext(SettingsContext);
 
   const [toggle, setToggle] = useState(false);
   const [id, setId] = useState('');
@@ -33,11 +35,19 @@ function TodoList(props) {
     props.updateItem(id, value);
   }
 
+  // Get current posts
+  const indexOfLastPost = context.currentPage * context.itemsPerPage;
+  const indexOfFirstPost = indexOfLastPost - context.itemsPerPage;
+  const currentPosts = props.list.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = pageNumber => context.setCurrentPage(pageNumber);
+
   return (
     <>
       <div id="modal">
         <Modal.Dialog>
-          {props.list.map(item => (
+          {currentPosts.map(item => (
             <div>
               <Modal.Header>
                 <Modal.Title>
@@ -47,7 +57,7 @@ function TodoList(props) {
                     key={item._id}
                     onClick={() => props.toggleComplete(item._id)}
                     type="submit"
-                    pill 
+                    pill
                     variant={item.complete === true ? 'danger' : 'success'}
                   >
                     {item.complete === true ? 'complete' : 'pending'}
@@ -74,6 +84,11 @@ function TodoList(props) {
           <Button onClick={(e) => { handleSubmit(e); handleToggle(id); }} >UPDATE</Button>
         </Form>
       </When>
+      <Pagination 
+      itemsPerPage={context.itemsPerPage} 
+      totalPosts={props.list.length} 
+      paginate={paginate}
+      />
     </>
   );
 }
