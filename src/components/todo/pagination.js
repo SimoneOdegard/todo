@@ -1,10 +1,10 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 
-const Pagination = ({ itemsPerPage, totalPosts, paginate }) => {
+const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
   const pageNumbers = [];
 
-  for(let i = 1; i <= Math.ceil(totalPosts/itemsPerPage); i++) {
+  for(let i = 1; i <= Math.ceil(totalItems/itemsPerPage); i++) {
     pageNumbers.push(i);
   }
 

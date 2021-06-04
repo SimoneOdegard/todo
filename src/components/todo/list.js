@@ -26,28 +26,35 @@ function TodoList(props) {
     setId(id);
   }
 
-  useEffect(() => {
-    console.log(value);
-  })
+  // useEffect(() => {
+  //   console.log(value);
+  // })
 
   function todo(task) {
     setValue(task);
     props.updateItem(id, value);
   }
 
-  // Get current posts
-  const indexOfLastPost = context.currentPage * context.itemsPerPage;
-  const indexOfFirstPost = indexOfLastPost - context.itemsPerPage;
-  const currentPosts = props.list.slice(indexOfFirstPost, indexOfLastPost);
+  let currentItems = props.list;
 
-  // Change page
+  if (context.hideComplete) {
+    currentItems = currentItems.filter(item => !item.complete);
+  }
+
+  // pagination
+  const indexOfLastItem = context.currentPage * context.itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - context.itemsPerPage;
+  currentItems = currentItems.slice(indexOfFirstItem, indexOfLastItem);
   const paginate = pageNumber => context.setCurrentPage(pageNumber);
 
   return (
     <>
       <div id="modal">
+        <Button variant="primary" onClick={() => context.setHideComplete(!context.hideComplete)}>
+          Hide Completed Items
+        </Button>
         <Modal.Dialog>
-          {currentPosts.map(item => (
+          {currentItems.map(item => (
             <div>
               <Modal.Header>
                 <Modal.Title>
@@ -86,7 +93,7 @@ function TodoList(props) {
       </When>
       <Pagination 
       itemsPerPage={context.itemsPerPage} 
-      totalPosts={props.list.length} 
+      totalItems={props.list.length} 
       paginate={paginate}
       />
     </>
